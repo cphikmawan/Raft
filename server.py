@@ -22,7 +22,12 @@ def getLeader():
 				Leader = node.findLeader()
 				return(Leader)
 			except:
-				return "no nodes is on"
+				try:
+					node = Pyro4.Proxy("PYRONAME:D")    # use name node object lookup uri shortcut
+					Leader = node.findLeader()
+					return(Leader)
+				except:
+					return "no nodes is on"
 
 @app.route("/data", methods=['GET', 'POST'])
 def data():
